@@ -15,25 +15,23 @@ import com.ibm.watson.developer_cloud.language_translator.v2.model.TranslationRe
 /**
 * Servlet implementation class SimpleServlet
 */
-@WebServlet(“/SimpleServlet”)
+@WebServlet("/SimpleServlet")
 public class SimpleServlet extends HttpServlet {
-private static final long serialVersionUID = 1L;
-/**
-* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-*/
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-response.setContentType(“text/html”);
-response.getWriter().print(translateToSpanish(“This is a test”));
-}
-
-private String translateToSpanish(String text){
-
-LanguageTranslator service = new LanguageTranslator();
-service.setUsernameAndPassword(“05a89fd6-c5d3-4f05-81b8-7350c5b1cafa”, “TeiQpIhLrkXz”);
-TranslationResult translationResult = service.translate(
-text, Language.ENGLISH, Language.SPANISH)
-.execute();
-return translationResult.getFirstTranslation();
-}
+	private static final long serialVersionUID = 1L;
+	/**
+	* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	*/
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		response.getWriter().print(translateToSpanish("This is a test"));
+	}
+	
+	private String translateToSpanish(String text){
+		LanguageTranslator service = new LanguageTranslator();
+		service.setUsernameAndPassword("05a89fd6-c5d3-4f05-81b8-7350c5b1cafa", "TeiQpIhLrkXz");
+		TranslationResult translationResult = service.translate(
+		text, Language.ENGLISH, Language.SPANISH).execute();
+		return translationResult.getFirstTranslation();
+	}
 }
