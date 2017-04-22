@@ -30,8 +30,7 @@ public class SimpleServlet extends HttpServlet {
 	private String translateToSpanish(String text){
 		LanguageTranslator service = new LanguageTranslator();
 		service.setUsernameAndPassword("05a89fd6-c5d3-4f05-81b8-7350c5b1cafa", "TeiQpIhLrkXz");
-		TranslationResult translationResult = service.translate(
-		text, Language.ENGLISH, Language.SPANISH).execute();
+		TranslationResult translationResult = service.translate(text, Language.ENGLISH, Language.SPANISH).execute();
 		return translationResult.getFirstTranslation();
 	}
 }
