@@ -24,13 +24,35 @@ public class SimpleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		response.getWriter().print(translateToSpanish("This is a test"));
+		String input_text = request.getParameter("input_text");
+		String language = request.getParameter("language");
+		if(language.equals("spanish")){
+			response.getWriter().print(translateToSpanish(input_text));
+		}else if(language.equals("italian")){
+			response.getWriter().print(translateToItalian(input_text));
+		}else if(language.equals("german")){
+			response.getWriter().print(translateToGerman(input_text));
+		}else{
+			response.getWriter().print("Could not get language "+ language);
+		}
 	}
 	
 	private String translateToSpanish(String text){
 		LanguageTranslator service = new LanguageTranslator();
 		service.setUsernameAndPassword("05a89fd6-c5d3-4f05-81b8-7350c5b1cafa", "TeiQpIhLrkXz");
 		TranslationResult translationResult = service.translate(text, Language.ENGLISH, Language.SPANISH).execute();
+		return translationResult.getFirstTranslation();
+	}
+	private String translateToGerman(String text){
+		LanguageTranslator service = new LanguageTranslator();
+		service.setUsernameAndPassword("05a89fd6-c5d3-4f05-81b8-7350c5b1cafa", "TeiQpIhLrkXz");
+		TranslationResult translationResult = service.translate(text, Language.ENGLISH, Language.GERMAN).execute();
+		return translationResult.getFirstTranslation();
+	}
+	private String translateToItalian(String text){
+		LanguageTranslator service = new LanguageTranslator();
+		service.setUsernameAndPassword("05a89fd6-c5d3-4f05-81b8-7350c5b1cafa", "TeiQpIhLrkXz");
+		TranslationResult translationResult = service.translate(text, Language.ENGLISH, Language.ITALIAN).execute();
 		return translationResult.getFirstTranslation();
 	}
 }
